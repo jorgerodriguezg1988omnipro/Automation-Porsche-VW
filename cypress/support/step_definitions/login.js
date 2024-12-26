@@ -26,7 +26,6 @@ before(() => {
   });
 
   // Scenario 1: Verificar que no permita iniciar sesión cuando las credenciales son inválidas
-  //prueba
   Given('que el usuario está en la página de inicio de sesión', function () {
     Home.gotoMiCuenta();
   });
