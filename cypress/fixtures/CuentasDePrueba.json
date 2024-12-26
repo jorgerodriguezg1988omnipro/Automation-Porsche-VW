@@ -1,6 +1,6 @@
 {
   "validUser": {
-    "email": "jorge.rodriguez.g.ap+01@gmail.com",
+    "email": "jorge.rodriguez.g.ap+03@gmail.com",
     "password": "Omni.pro"
   },
   "invalidUser": {
@@ -8,7 +8,7 @@
     "password": "wrongpassword"
   },
   "validEmailWrongPassword": {
-    "email": "jorge.rodriguez.g.ap+01@gmail.com",
+    "email": "jorge.rodriguez.g.ap+03@gmail.com",
     "password": "wrongpassword"
   },
   "validPasswordWrongEmail": {
@@ -19,7 +19,7 @@
     "email": "usuario_invalido@ejemplo.com"    
   },
   "validEmail": {
-    "email": "jorge.rodriguez.g.ap+01@gmail.com"    
+    "email": "jorge.rodriguez.g.ap+03@gmail.com"    
   },
   "validPassword": {
     "password": "Omni.pro"

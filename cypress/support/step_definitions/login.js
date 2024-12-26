@@ -1,5 +1,5 @@
 const { Given, When, Then } = require("@badeball/cypress-cucumber-preprocessor");
-const credentials = require('../../fixtures/CuentasDePrueba.json');
+
 
 import home from '../../pageObjects/home';
 const Home = new home();
@@ -9,71 +9,75 @@ const Login = new login();
 
 
 
-const errorMessageValidEmailWrongPassword = '';
+const errorMessageCampoObligatorioMail = '#account-email-error'
+const errorMessageCampoObligatorioPass = '#account-password-error'
+
+
 
 
 before(() => {      
-    cy.clearCookies();
-    cy.clearLocalStorage() ;
-    cy.viewport(1920, 1280);  
+  cy.clearCookies();
+  cy.clearLocalStorage();    
+  cy.viewport(1920, 1280);  
   });
 
-  beforeEach(() => {      
-    //cy.wait(1000)  
+  beforeEach(() => { 
+    cy.visit('/'); 
   });
 
   // Scenario 1: Verificar que no permita iniciar sesión cuando las credenciales son inválidas
   Given('que el usuario está en la página de inicio de sesión', function () {
-    cy.wait(5000)
+    Home.gotoMiCuenta();
   });
   
   When('el usuario introduce un correo electrónico válido y una contraseña incorrecta', function () {
-    // Implementar
+    Login.typeValidEmailWrongPassword();
   });
   
   When('el usuario hace clic en el botón de "Iniciar sesión"', function () {
-    // Implementar
+    Login.clickIniciarSesion();
   });
   
   Then('el usuario recibe un mensaje de error indicando que la contraseña es incorrecta', function () {
-    // Implementar
+    Login.messageErrorInicioSesion();
   });
-/*
+
   // Scenario 2: Verificar que no permita iniciar sesión con un correo no registrado
   When('el usuario introduce un correo electrónico no registrado y cualquier contraseña', function () {
-    // Implementar
+    Login.typeInvalidEmailWrongPassword();
   });
   
   Then('el usuario recibe un mensaje de error indicando que la cuenta no existe', function () {
-    // Implementar
+    Login.messageErrorInicioSesion();
   });
-  
+ 
   // Scenario 3: Verificar que no permita iniciar sesión sin ingresar el correo
   When('el usuario deja el campo de correo electrónico vacío', function () {
-    // Implementar
+    cy.wait(50);
   });
   
   When('llena el campo de contraseña', function () {
-    // Implementar
+    Login.typeValidUser();
+    cy.get('#account-email').clear();
   });
   
   Then('el usuario recibe un mensaje de error indicando que el campo de correo electrónico es obligatorio', function () {
-    // Implementar
+    cy.get(errorMessageCampoObligatorioMail).should('be.visible').contains('Campo obligatorio.');  
   });
 
    // Scenario 4: Verificar que no permita iniciar sesión sin ingresar la contraseña
    When('el usuario introduce un correo electrónico válido', function () {
-    // Implementar
+    Login.typeValidUser();
   });
   
   When('deja el campo de contraseña vacío', function () {
-    // Implementar
+    cy.get('#account-password').clear();
   });
   
   Then('el usuario recibe un mensaje de error indicando que el campo de contraseña es obligatorio', function () {
-    // Implementar
+    cy.get(errorMessageCampoObligatorioPass).should('be.visible').contains('Campo obligatorio.');
   });
-
+/*
   // Scenario 5: Verificar que permita realizar la Recuperación de Contraseña
   When('el usuario hace clic en el enlace de "¿Olvidaste tu contraseña?"', function () {
     // Implementar

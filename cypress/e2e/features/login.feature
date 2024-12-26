@@ -8,26 +8,26 @@ Feature: Inicio de Sesión
     And el usuario hace clic en el botón de "Iniciar sesión"
     Then el usuario recibe un mensaje de error indicando que la contraseña es incorrecta
 
-  #Scenario: 2. Verificar que no permita iniciar sesión con un correo no registrado
-  #  Given que el usuario está en la página de inicio de sesión
-  #  When el usuario introduce un correo electrónico no registrado y cualquier contraseña
-  #  And el usuario hace clic en el botón de "Iniciar sesión"
-  #  Then el usuario recibe un mensaje de error indicando que la cuenta no existe
-#
-  #Scenario: 3. Verificar que no permita iniciar sesión sin ingresar el correo
-  #  Given que el usuario está en la página de inicio de sesión
-  #  When el usuario deja el campo de correo electrónico vacío
-  #  And llena el campo de contraseña
-  #  And el usuario hace clic en el botón de "Iniciar sesión"
-  #  Then el usuario recibe un mensaje de error indicando que el campo de correo electrónico es obligatorio
-#
-  #Scenario: 4. Verificar que no permita iniciar sesión sin ingresar la contraseña
-  #  Given que el usuario está en la página de inicio de sesión
-  #  When el usuario introduce un correo electrónico válido
-  #  And deja el campo de contraseña vacío
-  #  And el usuario hace clic en el botón de "Iniciar sesión"
-  #  Then el usuario recibe un mensaje de error indicando que el campo de contraseña es obligatorio
-  #
+  Scenario: 2. Verificar que no permita iniciar sesión con un correo no registrado
+    Given que el usuario está en la página de inicio de sesión
+    When el usuario introduce un correo electrónico no registrado y cualquier contraseña
+    And el usuario hace clic en el botón de "Iniciar sesión"
+    Then el usuario recibe un mensaje de error indicando que la cuenta no existe
+
+  Scenario: 3. Verificar que no permita iniciar sesión sin ingresar el correo
+    Given que el usuario está en la página de inicio de sesión
+    When el usuario deja el campo de correo electrónico vacío
+    And llena el campo de contraseña
+    And el usuario hace clic en el botón de "Iniciar sesión"
+    Then el usuario recibe un mensaje de error indicando que el campo de correo electrónico es obligatorio
+
+  Scenario: 4. Verificar que no permita iniciar sesión sin ingresar la contraseña
+    Given que el usuario está en la página de inicio de sesión
+    When el usuario introduce un correo electrónico válido
+    And deja el campo de contraseña vacío
+    And el usuario hace clic en el botón de "Iniciar sesión"
+    Then el usuario recibe un mensaje de error indicando que el campo de contraseña es obligatorio
+  
   #Scenario: 5. Verificar que permita realizar la Recuperación de Contraseña
   #  Given que el usuario está en la página de inicio de sesión
   #  When el usuario hace clic en el enlace de "¿Olvidaste tu contraseña?"
