@@ -11,6 +11,8 @@ const Login = new login();
 
 const errorMessageCampoObligatorioMail = '#account-email-error'
 const errorMessageCampoObligatorioPass = '#account-password-error'
+const iconLoggedUser = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.logged > div > div.customer-welcome__icon.logged'
+
 
 
 
@@ -77,38 +79,39 @@ before(() => {
   Then('el usuario recibe un mensaje de error indicando que el campo de contraseña es obligatorio', function () {
     cy.get(errorMessageCampoObligatorioPass).should('be.visible').contains('Campo obligatorio.');
   });
-/*
+
   // Scenario 5: Verificar que permita realizar la Recuperación de Contraseña
   When('el usuario hace clic en el enlace de "¿Olvidaste tu contraseña?"', function () {
-    // Implementar
+    Login.olvidePassword();
   });
 
 Then('el usuario es redirigido a la página de recuperación de contraseña', function () {
-    // Implementar
+    Login.pageOlvidePassword();
   });
 
 // Scenario 6: Verificar que permita iniciar sesión desde el carrito de compra
 Given('que el usuario está en la página del carrito', function () {
-  // Implementar
+    Home.addVIN()
+    Home.buscarProducto()
+    Home.addProdFromPDP()
 });
 
 When('el usuario hace clic en el botón "Realizar compra"', function () {
-    // Implementar
+    Home.gotoCheckout()
 });
 
 When('el usuario introduce un correo electrónico y contraseña válidos desde el Checkout', function () {
-  // Implementar
+  Login.typeValidUserCheckout();
 });
 
 When('el usuario hace clic en el boton Iniciar Sesión que aparece en el Checkout', function () {
-  // Implementar
+  Login.loginFromCheckout();
 });
 
 Then('el usuario es redirigido al checkout', function () {
-    // Implementar
+    cy.get(iconLoggedUser).should('be.visible')
 });
-
-
+/*
 // Scenario 7: Verificar que un usuario registrado pueda iniciar sesión
 When('el usuario introduce un correo electrónico y contraseña válidos', function () {
     // Implementar
