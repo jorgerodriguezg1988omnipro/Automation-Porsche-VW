@@ -14,6 +14,20 @@ const buttonRestablecerPassword = '#send2'
 const inputCorreoElectronicoCheckout = '#customer-email'
 const inputpasswordCheckout = '#customer-password'
 const buttonIniciarSesionCheckout = '#customer-email-fieldset > fieldset > div.actions-toolbar > div.primary > button'
+const titleMiCuenta = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div.block-title'
+const containerGeneralInfo = '.block-content > .block-note'
+const titleContainerGeneralInfo = '.block-content > .block-note > p.title'
+const descriptionContainerGeneralInfo = '.block-content > .block-note > p.description'
+const containerInfoPersonal = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-information > div.box-content'
+const iconLoggedUser = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.logged > div > div.customer-welcome__icon.logged'
+const buttonLogout = '.link.authorization-link > a[data-post*="logout"]'
+
+
+
+
+
+
+
 
 
 
@@ -41,7 +55,8 @@ class login {
         cy.get(inputEmail).should('be.visible')
         cy.get(inputPassword).should('be.visible')
         const userData = credentials.validUser;
-        this.fillCredentials(inputEmail, inputPassword, userData.email, userData.password);        
+        this.fillCredentials(inputEmail, inputPassword, userData.email, userData.password);   
+        cy.wrap(userData.email).as('userEmail'); //cy.wrap(userData.email + 'x').as('userEmail');     
     }
 
     clickIniciarSesion() {
@@ -72,6 +87,42 @@ class login {
     loginFromCheckout() {
         cy.get(buttonIniciarSesionCheckout).realHover().should('be.visible').contains('Iniciar sesión').click()
     }
+
+    pageMiCuenta() {
+        cy.get(titleMiCuenta).should('be.visible').and('have.css', 'font-weight', '700').contains('Mi Cuenta')
+        cy.get(containerGeneralInfo).should('be.visible');
+        cy.get(titleContainerGeneralInfo).should('be.visible').and('contain', 'En mi cuenta encontrarás:')
+        cy.get(descriptionContainerGeneralInfo).should('be.visible').and('contain', 'En esta sección, podrás tener una visión general de sus pedidos')
+        //falta ingresar mas aserciones
+    }
+
+    checkUserEmailConsistency() {
+        cy.get(containerInfoPersonal).should('be.visible')
+        .invoke('text')
+        .then((extractedText) => {
+          let extractedEmail = '';
+          const words = extractedText.split(/\s+/);
+    
+          for (let i = 0; i < words.length; i++) {
+            if (words[i].includes('@')) {
+              extractedEmail = words[i];
+              break; 
+            }
+          }
+    
+          cy.get('@userEmail').then((userEmail) => {
+            expect(extractedEmail).to.equal(userEmail.trim()); // Comparar ambos valores
+          });
+        });
+    }
+
+    logout() {
+        cy.get(iconLoggedUser).should('be.visible').click().wait(500)
+        cy.get(buttonLogout).realHover().should('be.visible').click()
+
+        
+    }
+
 
 
 

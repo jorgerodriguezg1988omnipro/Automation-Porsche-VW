@@ -17,6 +17,7 @@ const iconLoggedUser = '#html-body > div.page-wrapper > header > div.header.cont
 
 
 
+
 before(() => {      
   cy.clearCookies();
   cy.clearLocalStorage();    
@@ -109,27 +110,34 @@ When('el usuario hace clic en el boton Iniciar Sesión que aparece en el Checkou
 });
 
 Then('el usuario es redirigido al checkout', function () {
-    cy.get(iconLoggedUser).should('be.visible')
+    cy.get(iconLoggedUser).should('be.visible').wait(2000)
+    Login.logout();
 });
-/*
+
 // Scenario 7: Verificar que un usuario registrado pueda iniciar sesión
 When('el usuario introduce un correo electrónico y contraseña válidos', function () {
-    // Implementar
+  Login.typeValidUser();
 });
 
 Then('el usuario es redirigido a Mi cuenta', function () {
-  // Implementar
+  Login.checkUserEmailConsistency();
 });
 
-// Scenario 8: Verificar que un usuario logueado pueda cerrar sesión
-When('hace clic en el botón de "Cerrar sesión"', function () {
-    // Implementar
+When('el usuario hace clic en el botón de "Cerrar sesión"', function () {
+  Login.logout();
+  cy.wait(6000);
 });
 
 Then('el usuario es redirigido al Home', function () {
-    // Implementar
+  Home.pageHomeGeneral();
 });
-*/
+
+
+
+
+    
+
+
           
 
   

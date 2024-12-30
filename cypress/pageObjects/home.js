@@ -1,3 +1,4 @@
+const header = '#html-body > div.page-wrapper > header > div.header.content'; 
 const containerIconInicioSesion = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.no-logged'; 
 const iconInicioSesion = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.no-logged > div > div.customer-welcome__icon.no-logged'; 
 const modalBienvenido = '#ui-id-2';
@@ -32,9 +33,15 @@ const buttonGotoCheckout = '#html-body > div.page-wrapper > section > div > div.
 
 class home {
     
+    pageHomeGeneral() {
+        cy.get(header).should('be.visible')
+        cy.get(containerIconInicioSesion).should('be.visible')
+        cy.get(iconInicioSesion).realHover().should('be.visible').contains('Iniciar sesión')
+    }
+    
     gotoMiCuenta() {
         cy.get(containerIconInicioSesion).should('be.visible').wait(1500)
-        cy.get(iconInicioSesion).realHover().should('be.visible').contains('Iniciar sesión').click( {force: true} ).wait(1500)
+        cy.get(iconInicioSesion).realHover().should('be.visible').contains('Iniciar sesión').click( {force: true} ).wait(3000)
         cy.get(modalBienvenido).should('be.visible').wait(1500)
         cy.get(titleModalBienvenido).should('be.visible').contains('Bienvenido a').wait(1500)
         cy.get(buttonModalInicioSesion).should('be.visible').contains('Inicia sesión o regístrate').realHover().wait(500).click( {force: true} )        
