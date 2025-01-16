@@ -1,7 +1,5 @@
 const credentials = require('../fixtures/CuentasDePrueba.json');
 
-
-
 const inputEmail = '#account-email'
 const inputPassword = '#account-password'
 const buttonIniciarSesion = '#send2'
@@ -19,23 +17,21 @@ const containerGeneralInfo = '.block-content > .block-note'
 const titleContainerGeneralInfo = '.block-content > .block-note > p.title'
 const descriptionContainerGeneralInfo = '.block-content > .block-note > p.description'
 const containerInfoPersonal = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-information > div.box-content'
+const titleInfoPersonal = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-information > strong'
+const buttonEditar = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-information > div.box-actions > a.action.edit'
+const buttonCambiarPassword = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-information > div.box-actions > a.action.change-password'
+const containerBoletinInformativo = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-newsletter'
+const titleBoletinInformativo = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-info > div:nth-child(3) > div.box.box-newsletter > strong'
+const containerMisDirecciones = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses'
+const titleMisDirecciones = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses > div.block-title'
+const titleDirFacturacion = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses > div.block-content > div.box.box-billing-address > strong'
+const titleDirEnvio = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses > div.block-content > div.box.box-shipping-address > strong'
 const iconLoggedUser = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.logged > div > div.customer-welcome__icon.logged'
 const buttonLogout = '.link.authorization-link > a[data-post*="logout"]'
 
 
 
-
-
-
-
-
-
-
-
-
-class login {
-    
-    
+class login {    
 
     typeValidEmailWrongPassword() {
         cy.get(inputEmail).should('be.visible')
@@ -89,11 +85,20 @@ class login {
     }
 
     pageMiCuenta() {
-        cy.get(titleMiCuenta).should('be.visible').and('have.css', 'font-weight', '700').contains('Mi Cuenta')
+        cy.get(titleMiCuenta).should('be.visible').and('contain', 'Mi cuenta')
         cy.get(containerGeneralInfo).should('be.visible');
-        cy.get(titleContainerGeneralInfo).should('be.visible').and('contain', 'En mi cuenta encontrarás:')
+        cy.get(titleContainerGeneralInfo).should('be.visible').and('contain', 'encontraras:')
         cy.get(descriptionContainerGeneralInfo).should('be.visible').and('contain', 'En esta sección, podrás tener una visión general de sus pedidos')
-        //falta ingresar mas aserciones
+        cy.get(containerInfoPersonal).should('be.visible')
+        cy.get(titleInfoPersonal).should('be.visible').and('contain', 'Información de contacto')
+        cy.get(buttonEditar).should('be.visible').and('contain', 'Editar')
+        cy.get(buttonCambiarPassword).should('be.visible').and('contain', 'Cambiar la contraseña') 
+        cy.get(containerBoletinInformativo).should('be.visible')
+        cy.get(titleBoletinInformativo).should('be.visible').and('contain', 'Boletín informativo')
+        cy.get(containerMisDirecciones).should('be.visible')
+        cy.get(titleMisDirecciones).should('be.visible').and('contain', 'Mis direcciones')
+        cy.get(titleDirFacturacion).should('be.visible').and('contain', 'Dirección de facturación')
+        cy.get(titleDirEnvio).should('be.visible').and('contain', 'Dirección de envío') 
     }
 
     checkUserEmailConsistency() {

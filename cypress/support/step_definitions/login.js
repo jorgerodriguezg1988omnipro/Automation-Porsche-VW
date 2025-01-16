@@ -1,31 +1,24 @@
 const { Given, When, Then } = require("@badeball/cypress-cucumber-preprocessor");
 
-
 import home from '../../pageObjects/home';
 const Home = new home();
 import login from '../../pageObjects/login';
 const Login = new login();
 
-
-
-
 const errorMessageCampoObligatorioMail = '#account-email-error'
 const errorMessageCampoObligatorioPass = '#account-password-error'
 const iconLoggedUser = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.logged > div > div.customer-welcome__icon.logged'
 
-
-
-
-
-
 before(() => {      
   cy.clearCookies();
-  cy.clearLocalStorage();    
-  cy.viewport(1920, 1280);  
+  cy.clearLocalStorage();      
   });
 
-  beforeEach(() => { 
+  beforeEach(() => {
+    cy.clearCookies();
+    cy.clearLocalStorage();  
     cy.visit('/'); 
+    cy.viewport(1920, 1280);  
   });
 
   // Scenario 1: Verificar que no permita iniciar sesión cuando las credenciales son inválidas
@@ -120,7 +113,10 @@ When('el usuario introduce un correo electrónico y contraseña válidos', funct
 });
 
 Then('el usuario es redirigido a Mi cuenta', function () {
+  cy.wait(2000)
+  Login.pageMiCuenta();
   Login.checkUserEmailConsistency();
+  
 });
 
 When('el usuario hace clic en el botón de "Cerrar sesión"', function () {
