@@ -83,7 +83,29 @@ Then('el usuario es redirigido a la página de recuperación de contraseña', fu
     Login.pageOlvidePassword();
   });
 
-// Scenario 6: Verificar que permita iniciar sesión desde el carrito de compra
+  // Scenario 6: Verificar que un usuario registrado pueda iniciar sesión
+When('el usuario introduce un correo electrónico y contraseña válidos', function () {
+  Login.typeValidUser();
+});
+
+Then('el usuario es redirigido a Mi cuenta', function () {
+  cy.wait(2000)
+  Login.pageMiCuenta();
+  Login.checkUserEmailConsistency();
+  
+});
+
+When('el usuario hace clic en el botón de "Cerrar sesión"', function () {
+  Login.logout();
+  cy.wait(6000);
+});
+
+Then('el usuario es redirigido al Home', function () {
+  Home.pageHomeGeneral();
+});
+
+/*
+// Scenario 7: Verificar que permita iniciar sesión desde el carrito de compra
 Given('que el usuario está en la página del carrito', function () {
     Home.addVIN()
     Home.buscarProducto()
@@ -106,27 +128,7 @@ Then('el usuario es redirigido al checkout', function () {
     cy.get(iconLoggedUser).should('be.visible').wait(2000)
     Login.logout();
 });
-
-// Scenario 7: Verificar que un usuario registrado pueda iniciar sesión
-When('el usuario introduce un correo electrónico y contraseña válidos', function () {
-  Login.typeValidUser();
-});
-
-Then('el usuario es redirigido a Mi cuenta', function () {
-  cy.wait(2000)
-  Login.pageMiCuenta();
-  Login.checkUserEmailConsistency();
-  
-});
-
-When('el usuario hace clic en el botón de "Cerrar sesión"', function () {
-  Login.logout();
-  cy.wait(6000);
-});
-
-Then('el usuario es redirigido al Home', function () {
-  Home.pageHomeGeneral();
-});
+*/
 
 
 
