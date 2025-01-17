@@ -123,7 +123,7 @@ class login {
 
     logout() {
         cy.get(iconLoggedUser).should('be.visible').click().wait(1000)
-        cy.get(buttonLogout).realHover().should('be.visible').contains('Cerrar sesión').click()
+        cy.get(buttonLogout).realHover().should('be.visible').contains('Cerrar sesión').click( {force: true} )
 
         
     }
