@@ -1,0 +1,58 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso para clonar el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Configuración de Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # Instalación de dependencias
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Ejecución de pruebas con Cypress
+      - name: Run Cypress tests
+        run: |
+          npx cypress run --headed --browser edge
+
+      # Subida de artefactos: Evidencias de screenshots y videos
+      - name: Cypress artifacts - Evidence videos
+        if: always()  # Asegura que se suban incluso si las pruebas fallan
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts-evidenceVideos
+          path: |
+            cypress/screenshots
+            cypress/videos
+
+      # Generación de reportes HTML
+      - name: Generate HTML report
+        run: |
+          npm install multiple-cucumber-html-reporter --save-dev
+          node cucumber-html-report.js --reportPath ./reports/cucumber
+
+      # Publicación de reportes como artefactos
+      - name: Publish reports as artifacts
+        uses: actions/upload-artifact@v3  # Actualizado a v3
+        if: always()
+        with:
+          name: test-report
+          path: ./reports/cucumber
