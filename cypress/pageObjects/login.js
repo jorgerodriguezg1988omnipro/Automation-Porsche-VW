@@ -26,7 +26,7 @@ const containerMisDirecciones = '#maincontent > div.columns > div.column.main > 
 const titleMisDirecciones = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses > div.block-title'
 const titleDirFacturacion = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses > div.block-content > div.box.box-billing-address > strong'
 const titleDirEnvio = '#maincontent > div.columns > div.column.main > div.block.block-dashboard-addresses > div.block-content > div.box.box-shipping-address > strong'
-const iconLoggedUser = '#html-body > div.page-wrapper > header > div.header.content > div.customer-welcome.logged > div > div.customer-welcome__icon.logged'
+const iconLoggedUser = 'div.customer-welcome.logged' // div.customer-welcome.logged
 const buttonLogout = '.link.authorization-link > a[data-post*="logout"]'
 
 

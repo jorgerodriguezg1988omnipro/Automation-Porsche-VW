@@ -31,7 +31,7 @@ jobs:
       # Ejecución de pruebas con Cypress
       - name: Run Cypress tests
         run: |
-          npx cypress run
+          npx cypress run --headed --browser edge
 
       # Subida de artefactos: Evidencias de screenshots y videos
       - name: Cypress artifacts - Evidence videos

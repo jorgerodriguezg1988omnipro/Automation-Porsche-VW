@@ -37,7 +37,7 @@ before(() => {
   });
   
   Then('es redirigido al panel de usuario', function () {
-    // implementar
+    // implementa
   });
 
 /*
