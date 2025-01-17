@@ -44,10 +44,10 @@ jobs:
             cypress/videos
 
       # Generación de reportes HTML
-      - name: Generate HTML report
-        run: |
-          npm install multiple-cucumber-html-reporter --save-dev
-          node cucumber-html-report.js --reportPath ./reports/cucumber
+      #- name: Generate HTML report
+      #  run: |
+      #    npm install multiple-cucumber-html-reporter --save-dev
+      #    node cucumber-html-report.js --reportPath ./reports/cucumber
 
       # Publicación de reportes como artefactos
       - name: Publish reports as artifacts
